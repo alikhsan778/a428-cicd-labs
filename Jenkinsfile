@@ -26,13 +26,11 @@ pipeline {
                         id: 'userInput',
                         message: 'Lanjutkan ke tahap Deploy?',
                         parameters: [
-                            [$class: 'ChoiceParameterDefinition', 
-                                choices: 'Proceed\nAbort',
-                                description: 'Pilih opsi untuk melanjutkan atau menghentikan pipeline ke tahap Deploy']
+                            choice(choices: ['Proceed', 'Abort'], description: 'Pilih opsi untuk melanjutkan atau menghentikan pipeline ke tahap Deploy', name: 'approval')
                         ]
                     )
-                    if (userInput == 'Abort') {
-                        error('Pipeline ke tahap Deploy dihentikan oleh pengguna')
+                    if (userInput.approval == 'Abort') {
+                        error('Pipeline ket tahap Deploy dihentikan oleh pengguna')
                     }
                 }
             }
