@@ -29,7 +29,7 @@ pipeline {
                             choice(choices: ['Proceed', 'Abort'], description: 'Pilih opsi untuk melanjutkan atau menghentikan pipeline ke tahap Deploy', name: 'approval')
                         ]
                     )
-                    if (userInput.approval == 'Abort') {
+                    if (userInput['approval']  == 'Abort') {
                         error('Pipeline ket tahap Deploy dihentikan oleh pengguna')
                     }
                 }
