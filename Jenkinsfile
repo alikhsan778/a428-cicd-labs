@@ -14,9 +14,9 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Test') { 
+        stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh' 
+                sh './jenkins/scripts/test.sh'
             }
         }
         stage('Manual Approval') {
@@ -29,8 +29,8 @@ pipeline {
                             choice(choices: ['Proceed', 'Abort'], description: 'Pilih opsi untuk melanjutkan atau menghentikan pipeline ke tahap Deploy', name: 'approval')
                         ]
                     )
-                    if (userInput['approval']  == 'Abort') {
-                        error('Pipeline ket tahap Deploy dihentikan oleh pengguna')
+                    if (params['approval'] == 'Abort') {
+                        error('Pipeline dihentikan oleh pengguna')
                     }
                 }
             }
