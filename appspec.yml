@@ -4,11 +4,19 @@ files:
   - source: /index.html
     destination: /var/www/html/
 hooks:
+ ApplicationStop:
+    - location: jenkins/scripts/stop_server.sh
+      timeout: 300
+      runas: root
   BeforeInstall:
-    - location: jenkins/scripts/deliver.sh
+    - location: jenkins/scripts/install_dependencies.sh
       timeout: 300
       runas: root
   ApplicationStart:
-    - location: jenkins/scripts/test.sh
+    - location: jenkins/scripts/deliver.sh
+      timeout: 300
+      runas: root
+  ValidateService:
+    - location: jenkins/scripts/validate_server.sh
       timeout: 300
       runas: root
